@@ -16,6 +16,11 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+
+		<!-- charset -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <!-- lib versions-->
 		<challenge.dto>0.0.1-SNAPSHOT</challenge.dto>
 	</properties>
@@ -26,15 +31,17 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 
+		<!-- DTO Lib -->
 		<dependency>
-			<groupId>com.merdadolibre.dto</groupId>
-			<artifactId>challenge.dto</artifactId>
+			<groupId>com.merdadolibre.data</groupId>
+			<artifactId>challenge-rest-data</artifactId>
 			<version>${challenge.dto}</version>
 		</dependency>
 
