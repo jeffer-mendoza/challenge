@@ -1,5 +1,7 @@
 package com.merdadolibre.challenge.controller.v1;
 
+import com.merdadolibre.challenge.exception.DistanceNotDeterminedException;
+import com.merdadolibre.challenge.exception.PositionNotDeterminedException;
 import com.merdadolibre.challenge.service.challenge.IChallengeService;
 import com.merdadolibre.challenge.utils.ConsUtil;
 import com.merdadolibre.dto.challenge.external.topsecret.TopSecretRequest;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/v1/topsecret")
+@RequestMapping("/v1")
 public class ChallengeController {
 
   private IChallengeService challengeService;
@@ -35,7 +37,8 @@ public class ChallengeController {
    */
   @PostMapping(value = "/topsecret", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<TopSecretResponse> topSecret(@Valid @RequestBody final TopSecretRequest request) {
+  public ResponseEntity<TopSecretResponse> topSecret(@Valid @RequestBody final TopSecretRequest request)
+      throws DistanceNotDeterminedException, PositionNotDeterminedException {
     log.info(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse = challengeService.identifierMessage(request);
     log.info(ConsUtil.END_METHOD);

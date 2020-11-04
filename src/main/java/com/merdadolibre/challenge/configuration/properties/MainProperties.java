@@ -1,6 +1,6 @@
 package com.merdadolibre.challenge.configuration.properties;
 
-import com.merdadolibre.dto.challenge.external.topsecret.model.Position;
+import com.merdadolibre.challenge.model.Vector;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -23,5 +23,5 @@ import org.springframework.context.annotation.Configuration;
 public class MainProperties {
 
   @NotEmpty
-  private List<Position> satellites;
+  private List<Vector> satellites;
 }

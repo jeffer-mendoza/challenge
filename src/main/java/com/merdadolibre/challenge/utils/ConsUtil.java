@@ -15,4 +15,9 @@ public final class ConsUtil {
   public static final String BEGIN_METHOD = "inside method";
   public static final String END_METHOD = "end method";
 
+  // exception message
+  public static final String POSITION_NOT_DETERMINED = "position not determined";
+  public static final String DISTANCE_NOT_DETERMINED = "information was not sent";
+  public static final String POSITION_IS_NULL = "ship position is null";
+
 }
