@@ -21,8 +21,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- lib versions-->
-		<challenge.dto>0.0.1-SNAPSHOT</challenge.dto>
+        <!-- plugin versions -->
+		<maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+
+        <!-- lib versions -->
+		<challenge.dto.version>0.0.1-SNAPSHOT</challenge.dto.version>
 	</properties>
 
 	<dependencies>
@@ -42,7 +45,7 @@
 		<dependency>
 			<groupId>com.merdadolibre.data</groupId>
 			<artifactId>challenge-rest-data</artifactId>
-			<version>${challenge.dto}</version>
+			<version>${challenge.dto.version}</version>
 		</dependency>
 
 		<dependency>
@@ -60,6 +63,27 @@
 
 	<build>
 		<plugins>
+			<!-- checkstyle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

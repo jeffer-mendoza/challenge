@@ -27,6 +27,12 @@ public class ChallengeController {
 
   private IChallengeService challengeService;
 
+  /**
+   * Determine the position of the ship according to the points given.
+   *
+   * @param request list of messages received by satellites and distance from the ship
+   * @return the position of the sending ship
+   */
   @PostMapping(value = "/topsecret", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TopSecretResponse> topSecret(@Valid @RequestBody final TopSecretRequest request) {
