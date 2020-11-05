@@ -19,7 +19,9 @@ gcloud container clusters get-credentials challenge-cluster --zone us-central1-a
 kubectl get pods
 
 # Build the backend Docker image
-gcloud builds submit -t gcr.io/$GCLOUD_PROJECT/challenge-backend ./
+gcloud builds submit -t gcr.io/$GCLOUD_PROJECT/challenge-backend ./backend
+
+# check Navigation menu > Container Registry
 
 # Open the backend-deployment.yaml file and replace the placeholders
 vim backend-deployment.yaml
