@@ -18,5 +18,6 @@ public interface IChallengeService {
 
   TopSecretResponse saveInformation(String satelliteName, TopSecretSplitRequest request, String ipAddress);
 
-  TopSecretResponse getInformation(String ipAddress) throws MissingInformationException, DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException;
+  TopSecretResponse getInformation(String ipAddress) throws MissingInformationException,
+      DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException;
 }
