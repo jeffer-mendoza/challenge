@@ -18,6 +18,7 @@ public final class ConsUtil {
   // exception message
   public static final String POSITION_NOT_DETERMINED = "position not determined";
   public static final String DISTANCE_NOT_DETERMINED = "information was not sent";
+  public static final String MESSAGE_NOT_DETERMINED = "missing information";
   public static final String POSITION_IS_NULL = "ship position is null";
 
 }

@@ -1,6 +1,7 @@
 package com.merdadolibre.challenge.controller.v1;
 
 import com.merdadolibre.challenge.exception.DistanceNotDeterminedException;
+import com.merdadolibre.challenge.exception.MessageNotDeterminedException;
 import com.merdadolibre.challenge.exception.PositionNotDeterminedException;
 import com.merdadolibre.challenge.service.challenge.IChallengeService;
 import com.merdadolibre.challenge.utils.ConsUtil;
@@ -38,7 +39,7 @@ public class ChallengeController {
   @PostMapping(value = "/topsecret", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TopSecretResponse> topSecret(@Valid @RequestBody final TopSecretRequest request)
-      throws DistanceNotDeterminedException, PositionNotDeterminedException {
+      throws DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException {
     log.info(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse = challengeService.identifierMessage(request);
     log.info(ConsUtil.END_METHOD);

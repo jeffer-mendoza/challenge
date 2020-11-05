@@ -118,7 +118,8 @@ public class TrilateralationUtil {
    */
   public static boolean checkEqualities(final Vector vector, final float distance, final double rootX,
                                         final double rootY) {
-    final double leftCalculate = Math.pow(rootX - vector.getPositionx(), 2) + Math.pow(rootY - vector.getPositiony(), 2);
+    final double leftCalculate = Math.pow(rootX - vector.getPositionx(), 2)
+        + Math.pow(rootY - vector.getPositiony(), 2);
     final double rigthCalculate = Math.pow(distance, 2);
     log.debug("equation {} == {}", leftCalculate, rigthCalculate);
     return leftCalculate == rigthCalculate;
