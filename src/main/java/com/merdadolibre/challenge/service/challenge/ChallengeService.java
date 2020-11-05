@@ -1,18 +1,24 @@
 package com.merdadolibre.challenge.service.challenge;
 
+import com.google.gson.Gson;
 import com.merdadolibre.challenge.configuration.properties.MainProperties;
 import com.merdadolibre.challenge.exception.DistanceNotDeterminedException;
 import com.merdadolibre.challenge.exception.MessageNotDeterminedException;
+import com.merdadolibre.challenge.exception.MissingInformationException;
 import com.merdadolibre.challenge.exception.PositionNotDeterminedException;
 import com.merdadolibre.challenge.model.Vector;
 import com.merdadolibre.challenge.utils.ConsUtil;
 import com.merdadolibre.challenge.utils.TrilateralationUtil;
 import com.merdadolibre.dto.challenge.external.topsecret.TopSecretRequest;
 import com.merdadolibre.dto.challenge.external.topsecret.TopSecretResponse;
+import com.merdadolibre.dto.challenge.external.topsecret.TopSecretSplitRequest;
 import com.merdadolibre.dto.challenge.external.topsecret.model.Position;
 import com.merdadolibre.dto.challenge.external.topsecret.model.Satellite;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -26,17 +32,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChallengeService implements IChallengeService {
 
-  private MainProperties config;
-
   private static final int QUANTITY_SATELLITE = 3;
   private static final int SATELLITE_0 = 0;
   private static final int SATELLITE_1 = 1;
   private static final int SATELLITE_2 = 2;
 
+  private static Map<String,TopSecretRequest> cache = new HashMap<>();
+
+  private MainProperties config;
+
   @Override
-  public TopSecretResponse identifierMessage(TopSecretRequest request) throws DistanceNotDeterminedException,
+  public TopSecretResponse identifierMessage(final TopSecretRequest request) throws DistanceNotDeterminedException,
       PositionNotDeterminedException, MessageNotDeterminedException {
-    log.info(ConsUtil.BEGIN_METHOD);
+    log.trace(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse;
     float[] distances = new float[QUANTITY_SATELLITE];
     List<String[]> messages = new ArrayList<>();
@@ -52,8 +60,41 @@ public class ChallengeService implements IChallengeService {
     topSecretResponse = TopSecretResponse.builder().position(position)
         .message(getMessage(messages.toArray(new String[messages.size()][0])))
         .build();
-    log.info(ConsUtil.END_METHOD);
+    log.trace(ConsUtil.END_METHOD);
     return topSecretResponse;
+  }
+
+  @Override
+  public TopSecretResponse saveInformation(final String satelliteName, final TopSecretSplitRequest request,
+                                           final String ipAddress) {
+    log.trace(ConsUtil.BEGIN_METHOD);
+    TopSecretRequest topSecretRequest = cache.get(ipAddress);
+    if (Objects.isNull(topSecretRequest)) {
+      topSecretRequest = new TopSecretRequest();
+    }
+    final Satellite satelliteNew = Satellite.builder().distance(request.getDistance())
+        .message(request.getMessage()).name(satelliteName).build();
+    if (topSecretRequest.getSatellites() == null) {
+      topSecretRequest.setSatellites(new ArrayList<>());
+    } else {
+      topSecretRequest.getSatellites().remove(satelliteNew);
+    }
+    topSecretRequest.getSatellites().add(satelliteNew);
+    cache.put(ipAddress, topSecretRequest);
+    log.trace(ConsUtil.END_METHOD);
+    return TopSecretResponse.builder().okMessage("ok").build();
+  }
+
+  @Override
+  public TopSecretResponse getInformation(String ipAddress) throws MissingInformationException,
+      DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException {
+    log.trace(ConsUtil.BEGIN_METHOD);
+    TopSecretRequest topSecretRequest = cache.get(ipAddress);
+    if (Objects.isNull(topSecretRequest) || topSecretRequest.getSatellites().size() != 3) {
+      throw new MissingInformationException(ConsUtil.MISSING_INFORMATION);
+    }
+    log.trace(ConsUtil.END_METHOD);
+    return identifierMessage(topSecretRequest);
   }
 
   /**
@@ -107,7 +148,7 @@ public class ChallengeService implements IChallengeService {
    */
   private int getIndex(final String satelliteName, final List<Vector> satellites)
       throws DistanceNotDeterminedException {
-    log.info(ConsUtil.BEGIN_METHOD);
+    log.trace(ConsUtil.BEGIN_METHOD);
     for (int i = 0; i < satellites.size(); i++) {
       if (satellites.get(i).getName().equalsIgnoreCase(satelliteName)) {
         return i;
