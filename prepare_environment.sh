@@ -5,7 +5,7 @@ echo "Exporting GCLOUD_PROJECT"
 export GCLOUD_PROJECT=$DEVSHELL_PROJECT_ID
 
 echo "Installing dependencies"
-mvn clean install
+mvn clean install -DskipTests
 
 echo "Copying backend output into backend folder"
 cp ./target/challenge-0.0.2-SNAPSHOT.jar ./backend/
