@@ -24,4 +24,6 @@ public class MainProperties {
 
   @NotEmpty
   private List<Vector> satellites;
+
+  private double toleranceError = 0.1;
 }

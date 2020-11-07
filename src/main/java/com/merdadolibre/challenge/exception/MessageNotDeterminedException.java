@@ -6,9 +6,6 @@ package com.merdadolibre.challenge.exception;
  */
 public class MessageNotDeterminedException extends Exception {
 
-  public MessageNotDeterminedException() {
-  }
-
   public MessageNotDeterminedException(String message) {
     super(message);
   }

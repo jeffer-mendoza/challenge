@@ -6,9 +6,6 @@ package com.merdadolibre.challenge.exception;
  */
 public class PositionNotDeterminedException extends Exception {
 
-  public PositionNotDeterminedException() {
-  }
-
   public PositionNotDeterminedException(String message) {
     super(message);
   }

@@ -1,6 +1,5 @@
 package com.merdadolibre.challenge.controller.v1;
 
-import com.merdadolibre.challenge.exception.DistanceNotDeterminedException;
 import com.merdadolibre.challenge.exception.MessageNotDeterminedException;
 import com.merdadolibre.challenge.exception.MissingInformationException;
 import com.merdadolibre.challenge.exception.PositionNotDeterminedException;
@@ -11,11 +10,13 @@ import com.merdadolibre.dto.challenge.external.topsecret.TopSecretResponse;
 import com.merdadolibre.dto.challenge.external.topsecret.TopSecretSplitRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/v1")
+@Validated
 public class ChallengeController {
 
   private IChallengeService challengeService;
@@ -44,7 +46,7 @@ public class ChallengeController {
   @PostMapping(value = "/topsecret", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TopSecretResponse> topSecret(@Valid @RequestBody final TopSecretRequest request)
-      throws DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException {
+      throws PositionNotDeterminedException, MessageNotDeterminedException {
     log.trace(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse = challengeService.identifierMessage(request);
     log.trace(ConsUtil.END_METHOD);
@@ -62,7 +64,7 @@ public class ChallengeController {
   @PostMapping(value = "/topsecret_split/{satellite_name}", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TopSecretResponse> topSecretSplit(
-      @PathVariable(value = "satellite_name") final String satelliteName,
+      @PathVariable(value = "satellite_name") @NotBlank final String satelliteName,
       @Valid @RequestBody final TopSecretSplitRequest request, HttpServletRequest httpServletRequest) {
     log.trace(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse = challengeService.saveInformation(satelliteName, request,
@@ -79,7 +81,7 @@ public class ChallengeController {
    */
   @GetMapping(value = "/topsecret_split", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TopSecretResponse> topSecretSplit(HttpServletRequest httpServletRequest)
-      throws DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException,
+      throws PositionNotDeterminedException, MessageNotDeterminedException,
       MissingInformationException {
     log.trace(ConsUtil.BEGIN_METHOD);
     TopSecretResponse topSecretResponse = challengeService.getInformation(httpServletRequest.getRemoteAddr());
