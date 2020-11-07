@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  * @since 1.0
  */
 @Slf4j

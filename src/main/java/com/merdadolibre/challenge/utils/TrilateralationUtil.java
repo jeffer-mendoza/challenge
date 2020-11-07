@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Class that implements the mathematical method of trilateration to find a relative point in the plane.
  *
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  * @see <a href="https://es.wikipedia.org/wiki/Trilateraci%C3%B3n">Article describing the mathematical method</a>
  * @since 1.0
  */

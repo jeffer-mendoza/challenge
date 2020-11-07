@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  */
 @Data
 @Builder

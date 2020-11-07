@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Main Properties.
  *
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  * @since 1.0
  */
 @Getter

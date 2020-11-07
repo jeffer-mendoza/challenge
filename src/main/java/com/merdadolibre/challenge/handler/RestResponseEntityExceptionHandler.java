@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  */
 @ControllerAdvice
 @Slf4j

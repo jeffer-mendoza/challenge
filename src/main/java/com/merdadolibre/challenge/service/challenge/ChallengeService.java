@@ -25,7 +25,11 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * class that implements the business logic to find the positions, the messages and the caching of the information
+ * sent by the ship.
+ *
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
+ * @since 1.0
  */
 @Slf4j
 @AllArgsConstructor
@@ -55,6 +59,13 @@ public class ChallengeService implements IChallengeService {
     }
   }
 
+  /**
+   * main method that orchestrates the calls to the submethods to resolve the position and get the message.
+   * @param request message and distance
+   * @return instance of top secret response with message and position
+   * @throws PositionNotDeterminedException if the position cannot be found with the mathematical model
+   * @throws MessageNotDeterminedException if the message cannot be found
+   */
   @Override
   public TopSecretResponse identifierMessage(final TopSecretRequest request) throws PositionNotDeterminedException,
       MessageNotDeterminedException {
@@ -79,6 +90,15 @@ public class ChallengeService implements IChallengeService {
     return topSecretResponse;
   }
 
+
+  /**
+   * allows to store the information received in the cache, associated with the ip.
+   *
+   * @param satelliteName satellite name
+   * @param request message and distance
+   * @param ipAddress ip address associated with the stored cache
+   * @return storage confirmation
+   */
   @Override
   public TopSecretResponse saveInformation(final String satelliteName, final TopSecretSplitRequest request,
                                            final String ipAddress) {
@@ -100,6 +120,15 @@ public class ChallengeService implements IChallengeService {
     return TopSecretResponse.builder().okMessage(ConsUtil.MESSAGE_OK).build();
   }
 
+  /**
+   * obtain the message and position information from the information that is in cache.
+   *
+   * @param ipAddress ip address associated with the stored cache
+   * @return instance of top secret response with message and position
+   * @throws MissingInformationException if not enough information is found
+   * @throws PositionNotDeterminedException if the position cannot be found with the mathematical model
+   * @throws MessageNotDeterminedException if the message cannot be found
+   */
   @Override
   public TopSecretResponse getInformation(String ipAddress) throws MissingInformationException,
       PositionNotDeterminedException, MessageNotDeterminedException {

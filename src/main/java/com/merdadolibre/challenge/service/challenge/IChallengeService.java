@@ -8,7 +8,7 @@ import com.merdadolibre.dto.challenge.external.topsecret.TopSecretResponse;
 import com.merdadolibre.dto.challenge.external.topsecret.TopSecretSplitRequest;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  */
 public interface IChallengeService {
 
