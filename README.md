@@ -12,6 +12,11 @@ carries rations and weapons for an entire legion.
 
 ![alt text](./doc/img/problem.png)
 
+## Documentation
+
+The documentation of the mathematical model on which the implementation of this project is based
+ can be found [here](./doc/mathematical-model.md)
+
 
 ## Demo
 
@@ -105,8 +110,7 @@ Technologies and tools used in the development of the project:
 * [Sprint Boot](https://spring.io/projects/spring-boot) - The Web Framework
 * [Maven](https://maven.apache.org/) - Dependencies Management
 * [Google Cloud Platform](https://cloud.google.com/) - Cloud Provider
-* [Google Kubernetes Engine
-](https://cloud.google.com/kubernetes-engine/) - Deployment Tool
+* [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) - Deployment Tool
 * [Intellij Idea Community Edition](https://www.jetbrains.com/es-es/idea/download) - IDE
 
 
