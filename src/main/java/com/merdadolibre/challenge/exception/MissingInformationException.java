@@ -1,7 +1,7 @@
 package com.merdadolibre.challenge.exception;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
  */
 public class MissingInformationException extends Exception {
 

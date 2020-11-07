@@ -1,0 +1,899 @@
+{
+	"info": {
+		"_postman_id": "34c19810-e06f-475a-9b33-c397dcd35657",
+		"name": "challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "topSecret",
+			"item": [
+				{
+					"name": "cases: 400",
+					"item": [
+						{
+							"name": "topSecret - 400: satellite name empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"\",\n      \"distance\": 100.0,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite distance negative",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": -100.0,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite distance null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: length satellite invalid",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 100.0,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite message null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 100\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: satellite message empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 100,\n      \"message\": []\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cases: 404",
+					"item": [
+						{
+							"name": "topSecret - 404: position not determined",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 100.0,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 115.5,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 142.7,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 400: message not determined - different sizes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 485.41,\n      \"message\": [\n        \"este\",\n        \"mensaje\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 265.75,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 600.50,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cases: 200",
+					"item": [
+						{
+							"name": "topSecret - 200: P(-100, 75) - 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 485.41,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"\",\n        \"mensaje\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 265.75,\n      \"message\": [\n        \"\",\n        \"es\",\n        \"\",\n        \"\",\n        \"secreto\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 600.50,\n      \"message\": [\n        \"este\",\n        \"\",\n        \"un\",\n        \"\",\n        \"\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-100, 75) - 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 485.41,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 265.75,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 600.50,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-200,150)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 460.97,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 390.51,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 701.78,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-28.6, 21.4)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 520.84,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 176.85,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 534.38,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-8, 6)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 533.39,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 151.33,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 516.62,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(0, 0)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 538.52,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 141.42,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 509.90,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-2600, 1950)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 3005.41,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 3390.06,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 3610.06,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(10600, 7050)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 13257.92,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 12703.25,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 12260.20,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(10600, -3.2)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 3005.41,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 3390.06,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 3610.06,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topSecret - 200: P(-5400, -1.4)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"satellites\": [\n    {\n      \"name\": \"kenobi\",\n      \"distance\": 4904.02,\n      \"message\": [\n        \"hola\",\n        \"mundo\",\n        \"\",\n        \"\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"skywalker\",\n      \"distance\": 5500.88,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"prueba\",\n        \"\"\n      ]\n    },\n    {\n      \"name\": \"sato\",\n      \"distance\": 5900.87,\n      \"message\": [\n        \"\",\n        \"\",\n        \"\",\n        \"\",\n        \"mercado-libre\"\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "topSecretSplit - POST",
+			"item": [
+				{
+					"name": "cases: 400",
+					"item": [
+						{
+							"name": "topsecret_split - 400: distance null ",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/kenobi",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"kenobi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split - 400: distance negative",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"distance\": -1,\n    \"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/kenobi",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"kenobi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split - 400:  message null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"distance\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/kenobi",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"kenobi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split - 400:  message empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"distance\": 100,\n    \"message\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/kenobi",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"kenobi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split - 400:  satellite_name null",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"distance\": 100,\n    \"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cases: 200",
+					"item": [
+						{
+							"name": "topsecret_split kenobi - 200",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"distance\": 485.41,\n\"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/kenobi",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"kenobi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split sato - 200",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"distance\": 600.52,\n\"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/sato",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"sato"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "topsecret_split skywalker - 200",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"distance\": 265.75,\n\"message\": [\"este\", \"\", \"\", \"mensaje\", \"\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split/skywalker",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split",
+										"skywalker"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1b2e1a36-9efb-4c31-af68-5599438b4d41",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fd43ac8-73e0-4f8d-a489-fa25ab8e6dd4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "topSecretSplit - GET",
+			"item": [
+				{
+					"name": "cases: 404",
+					"item": [
+						{
+							"name": "topsecret_split - 404: no information",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cases: 200",
+					"item": [
+						{
+							"name": "topsecret_split: 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/v1/topsecret_split",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"topsecret_split"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

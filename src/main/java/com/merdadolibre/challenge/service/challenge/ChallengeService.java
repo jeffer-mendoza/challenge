@@ -1,8 +1,6 @@
 package com.merdadolibre.challenge.service.challenge;
 
-import com.google.gson.Gson;
 import com.merdadolibre.challenge.configuration.properties.MainProperties;
-import com.merdadolibre.challenge.exception.DistanceNotDeterminedException;
 import com.merdadolibre.challenge.exception.MessageNotDeterminedException;
 import com.merdadolibre.challenge.exception.MissingInformationException;
 import com.merdadolibre.challenge.exception.PositionNotDeterminedException;
@@ -19,16 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Jefferson Mendoza, jefferson.mendoza@fonyou.com
+ * class that implements the business logic to find the positions, the messages and the caching of the information
+ * sent by the ship.
+ *
+ * @author Jefferson Mendoza, mendosajefferson@gmail.com
+ * @since 1.0
  */
 @Slf4j
 @AllArgsConstructor
+
 @Service
 public class ChallengeService implements IChallengeService {
 
@@ -37,33 +42,63 @@ public class ChallengeService implements IChallengeService {
   private static final int SATELLITE_1 = 1;
   private static final int SATELLITE_2 = 2;
 
-  private static Map<String,TopSecretRequest> cache = new HashMap<>();
-
+  @Setter private Map<String,TopSecretRequest> cache;
   private MainProperties config;
+  private  Map<String, Integer>  satellitesOrder;
 
+  /**
+   * initialize the position of the satellites.
+   */
+  @PostConstruct
+  public void init() {
+    int index = 0;
+    satellitesOrder = new HashMap<>();
+    for (Vector satellite : config.getSatellites()) {
+      satellitesOrder.put(satellite.getName(), index);
+      index++;
+    }
+  }
+
+  /**
+   * main method that orchestrates the calls to the submethods to resolve the position and get the message.
+   * @param request message and distance
+   * @return instance of top secret response with message and position
+   * @throws PositionNotDeterminedException if the position cannot be found with the mathematical model
+   * @throws MessageNotDeterminedException if the message cannot be found
+   */
   @Override
-  public TopSecretResponse identifierMessage(final TopSecretRequest request) throws DistanceNotDeterminedException,
-      PositionNotDeterminedException, MessageNotDeterminedException {
+  public TopSecretResponse identifierMessage(final TopSecretRequest request) throws PositionNotDeterminedException,
+      MessageNotDeterminedException {
     log.trace(ConsUtil.BEGIN_METHOD);
-    TopSecretResponse topSecretResponse;
     float[] distances = new float[QUANTITY_SATELLITE];
     List<String[]> messages = new ArrayList<>();
-    int index;
+    Integer index;
     for (Satellite satellite : request.getSatellites()) {
-      index = getIndex(satellite.getName(), config.getSatellites());
-      distances[index] = satellite.getDistance();
-      messages.add(satellite.getMessage());
+      index = satellitesOrder.getOrDefault(satellite.getName(), null);
+      if (index != null) {
+        distances[index] = satellite.getDistance();
+        messages.add(satellite.getMessage());
+      }
     }
     final Vector shipPosition = getLocation(distances);
     final Position position = Position.builder()
         .x((float)shipPosition.getPositionx()).y((float)shipPosition.getPositiony()).build();
-    topSecretResponse = TopSecretResponse.builder().position(position)
+    TopSecretResponse topSecretResponse = TopSecretResponse.builder().position(position)
         .message(getMessage(messages.toArray(new String[messages.size()][0])))
         .build();
     log.trace(ConsUtil.END_METHOD);
     return topSecretResponse;
   }
 
+
+  /**
+   * allows to store the information received in the cache, associated with the ip.
+   *
+   * @param satelliteName satellite name
+   * @param request message and distance
+   * @param ipAddress ip address associated with the stored cache
+   * @return storage confirmation
+   */
   @Override
   public TopSecretResponse saveInformation(final String satelliteName, final TopSecretSplitRequest request,
                                            final String ipAddress) {
@@ -82,12 +117,21 @@ public class ChallengeService implements IChallengeService {
     topSecretRequest.getSatellites().add(satelliteNew);
     cache.put(ipAddress, topSecretRequest);
     log.trace(ConsUtil.END_METHOD);
-    return TopSecretResponse.builder().okMessage("ok").build();
+    return TopSecretResponse.builder().okMessage(ConsUtil.MESSAGE_OK).build();
   }
 
+  /**
+   * obtain the message and position information from the information that is in cache.
+   *
+   * @param ipAddress ip address associated with the stored cache
+   * @return instance of top secret response with message and position
+   * @throws MissingInformationException if not enough information is found
+   * @throws PositionNotDeterminedException if the position cannot be found with the mathematical model
+   * @throws MessageNotDeterminedException if the message cannot be found
+   */
   @Override
   public TopSecretResponse getInformation(String ipAddress) throws MissingInformationException,
-      DistanceNotDeterminedException, PositionNotDeterminedException, MessageNotDeterminedException {
+      PositionNotDeterminedException, MessageNotDeterminedException {
     log.trace(ConsUtil.BEGIN_METHOD);
     TopSecretRequest topSecretRequest = cache.get(ipAddress);
     if (Objects.isNull(topSecretRequest) || topSecretRequest.getSatellites().size() != 3) {
@@ -105,14 +149,9 @@ public class ChallengeService implements IChallengeService {
    * @throws PositionNotDeterminedException if no solution is found to the system of equations
    */
   private Vector getLocation(float ...distances) throws PositionNotDeterminedException {
-    final Vector shipPosition =  TrilateralationUtil.determinePosition(config.getSatellites().get(SATELLITE_0),
-        config.getSatellites().get(SATELLITE_1), config.getSatellites().get(SATELLITE_2), distances);
-    if (shipPosition == null) {
-      log.warn(ConsUtil.POSITION_IS_NULL);
-      throw new PositionNotDeterminedException(ConsUtil.POSITION_NOT_DETERMINED);
-    } else {
-      return shipPosition;
-    }
+    return TrilateralationUtil.determinePosition(config.getSatellites().get(SATELLITE_0),
+        config.getSatellites().get(SATELLITE_1), config.getSatellites().get(SATELLITE_2), distances,
+        config.getToleranceError());
   }
 
 
@@ -131,29 +170,13 @@ public class ChallengeService implements IChallengeService {
     for (int i = 0; i < size; i++) {
       temp = Strings.EMPTY;
       for (String[] messageSatellite : messages) {
-        if (messageSatellite.length > i && (Strings.isNotBlank(messageSatellite[i]))) {
+        if (Strings.isNotBlank(messageSatellite[i])) {
           temp = messageSatellite[i];
         }
       }
       finalMessage[i] = temp;
     }
-    return String.join(" ", finalMessage);
+    return String.join(" ", finalMessage).trim();
   }
 
-  /**
-   * Get index of array.
-   *
-   * @return return the index for configured the array of distances
-   * @throws DistanceNotDeterminedException if the satellite information is not correct
-   */
-  private int getIndex(final String satelliteName, final List<Vector> satellites)
-      throws DistanceNotDeterminedException {
-    log.trace(ConsUtil.BEGIN_METHOD);
-    for (int i = 0; i < satellites.size(); i++) {
-      if (satellites.get(i).getName().equalsIgnoreCase(satelliteName)) {
-        return i;
-      }
-    }
-    throw new DistanceNotDeterminedException(ConsUtil.DISTANCE_NOT_DETERMINED);
-  }
 }
