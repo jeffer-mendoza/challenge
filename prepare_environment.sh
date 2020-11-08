@@ -8,7 +8,7 @@ echo "Installing dependencies"
 mvn clean install -P pro
 
 echo "Copying backend output into backend folder"
-cp ./target/challenge-0.0.2-SNAPSHOT.jar ./backend/
+cp ./target/challenge-1.1.jar ./backend/
 
 echo "Creating Container Engine cluster"
 gcloud container clusters create challenge-cluster --zone us-central1-a --scopes cloud-platform
@@ -21,6 +21,11 @@ echo "Deploying to Container Engine"
 sed -i -e "s/\[GCLOUD_PROJECT\]/$DEVSHELL_PROJECT_ID/g" ./backend-deployment.yaml
 kubectl create -f ./backend-deployment.yaml
 kubectl create -f ./service.yaml
-#kubectl delete -f ./backend-deployment.yaml
+
 
 echo "Project ID: $DEVSHELL_PROJECT_ID"
+
+# reiniciar process
+# gcloud container clusters delete challenge-cluster --zone us-central1-a
+# kubectl delete -f ./backend-deployment.yaml
+# kubectl delete -f ./service.yaml
