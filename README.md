@@ -20,7 +20,7 @@ The documentation of the mathematical model on which the implementation of this 
 
 ## Demo
 
-[Live Demo](http://104.154.79.57/)
+[Live Demo](http://35.225.222.239)
 
 
 ## How to start? 🚀
